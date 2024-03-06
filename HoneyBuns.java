@@ -2,8 +2,12 @@ package project;
 
 public class HoneyBuns {
     
-    //----------CALL CARD FUNCTION----------//
-    // leave blank til end //
+    public static void main(String[] args) {
+        //----------CALL CARD FUNCTION----------//
+        // leave blank til end //
+        // playgame();
+    }
+
 
     //----------IMPLEMENT CARDS----------//
     // all game flow implemented here
