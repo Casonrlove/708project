@@ -9,7 +9,7 @@ public class HoneyBuns {
     }
 
 
-    //----------IMPLEMENT CARDS----------//
+    //-----------IMPLEMENT CARDS-----------//
     // all game flow implemented here
 
     //----------IMPLEMENT RULE1&2----------//
