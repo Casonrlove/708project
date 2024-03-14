@@ -1,1 +1,1 @@
-randomInt
+chosenCard

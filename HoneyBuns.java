@@ -41,13 +41,18 @@ public class HoneyBuns {
         ArrayList<String> discardPile = new ArrayList<String>(); // Assumption: The first card in the discard Pile is the Top card
         ArrayList<String> currentPlayer; // This will point to the deck of the current player
 
+        // 4 Players (Each Deck is an Array List )
+        ArrayList<String> userPlayer = new ArrayList<String>();
+        ArrayList<String> computerPlayer2 = new ArrayList<String>();
+        ArrayList<String> computerPlayer3 = new ArrayList<String>();
+        ArrayList<String> computerPlayer4 = new ArrayList<String>();
 
         // 1. Create and Shuffle Deck 
         createShuffledDrawPile(drawPile);
         // printArrayList(drawPile);
 
         // 2. Distribute Cards
-        // TODO: Implement Below (Somehow) (Could have 1 arrayList per player, or 1 array with 4 arraylists)
+        // TODO: Implement Below
         //distributeCards(drawPile, player1Deck, player2Deck, player3Deck, player4Deck);
 
         // 3. Create Initial Discard Pile
@@ -55,30 +60,50 @@ public class HoneyBuns {
         //printArrayList(drawPile);
         //printArrayList(discardPile);
 
+        currentPlayer = userPlayer; // User Player Goes First 
+
         // Start The Game 
-        while(rule5()){ // While game is not Won
+        while(rule5(/* Might need to update the inputs here */)){ // While game is not Won
             
-            // 4. 
-
+            // 4. Play Cards
             
-            if(/* currentPlayer == userPlayer */ true){ 
+            String chosenCard = "";
+            if(currentPlayer == userPlayer){ 
 
+                // TODO: PROMPT USER TO CHOOSE A CARD SOMEHOW
                 // Show a prompt for user to choose their card or something
-
+                chosenCard = "NA";
 
             }else { // CurrentPlayer is a computer, therefore we must choose how they play their turn 
-                
-                
-            }
-            
-            // Rule 7 will placed in somewhere
-            while(!rule7()){ // Check if Card being Played 
+
+                // TODO: HAVE COMPUTER CHOOSE A CARD
+                chosenCard = "NA";
 
             }
+            
+            
+
+            
+            if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){
+                /* Card Being Played matches the Suite or Number of top of discard pile */ 
+               
+                // Rule 7 Applies
+                // Play Card by removing card from the player deck , and inserting to the top of dicard pile
+                rule7(chosenCard, currentPlayer,discardPile);
+                
+            }else if(false/* Conditions for Other Rule */){
+                
+                // etc..
+
+            }
+
+            // PLAY CARDS BELOW 
         
 
 
-            // 6. Play Next Player TODO: IMPLEMENT BELOW 
+            // 6. Play Next Player TODO: IMPLEMENT BELOW ( )
+            // Order could be User 1-> Computer 2-> Comp 3 -> Comp 4  Then loop back 
+            // So, if we know currentPlayer , then we know the next player
             nextPlayer();
         }
 
@@ -106,9 +131,18 @@ public class HoneyBuns {
     // rules 7 and 8 are implemented here
     
     /* 
-     *  Rule 7 - Daniel B.
-     *  A person can play a card with the same number or same suit that matches the top of the discard pile.
+     *  Rule 7 - Daniel B. 
+     * A person can play a card with the same number or same suit that matches the top of the discard pile.
      */
+
+     static void rule7 (String cardPlayed,ArrayList<String> playerDeck, ArrayList<String> discardDeck){
+        
+        /* Playing Card  */
+        playerDeck.remove(cardPlayed);
+        discardDeck.add( 0,cardPlayed);
+
+
+     }
 
     /**
      *  Rule 8 - Daniel B.
