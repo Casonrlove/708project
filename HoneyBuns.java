@@ -101,10 +101,10 @@ public class HoneyBuns {
         
 
 
-            // 6. Play Next Player TODO: IMPLEMENT BELOW ( )
+            // 6. Play Next Player 
             // Order could be User 1-> Computer 2-> Comp 3 -> Comp 4  Then loop back 
             // So, if we know currentPlayer , then we know the next player
-            nextPlayer();
+            nextPlayer(currentPlayer, userPlayer,computerPlayer2,computerPlayer3,computerPlayer4);
         }
 
         
@@ -158,8 +158,6 @@ public class HoneyBuns {
          * 2. Remove the card at that index from the discardDeck
          * 3. Add that card to end of drawDeck
          */
-
-         System.out.println("TEST"+ (int)(Math.random() * (1) ));
 
          while(discardDeck.size() > 1){
             int randomInt = (int)(Math.random() * (discardDeck.size()-1) ) + 1 ; // Make sure we don't remove first card of discard pile
@@ -277,8 +275,26 @@ public class HoneyBuns {
         discardDeck.add(0,discardCard);
     } // End of discardCard()
 
-    // TODO: SOMEHOME DETEMINE NEXT PLAYER
-    static void nextPlayer(){}
+    /**
+     * Updates Current Player to the next player
+     * @param currDeck
+     * @param player1Deck
+     * @param player2Deck
+     * @param player3Deck
+     * @param player4Deck
+     */
+    static void nextPlayer(ArrayList<String> currDeck,ArrayList<String> player1Deck,ArrayList<String> player2Deck,ArrayList<String> player3Deck,ArrayList<String> player4Deck){
+        if(currDeck == player1Deck){
+            currDeck = player2Deck;
+        }else if(currDeck == player2Deck){
+            currDeck = player3Deck;
+        }else if(currDeck == player3Deck){
+            currDeck = player4Deck;
+        }else if(currDeck == player4Deck){
+            currDeck = player1Deck;
+        }
+
+    }
 
     /***************************  Debug Functions  ***************************************/
     static void printArrayList(ArrayList<String> arrayList){
