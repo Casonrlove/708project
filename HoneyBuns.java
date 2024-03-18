@@ -76,7 +76,7 @@ public class HoneyBuns {
 
             }else { // CurrentPlayer is a computer, therefore we must choose how they play their turn 
 
-                // TODO: HAVE COMPUTER CHOOSE A CARD
+                // TODO: HAVE COMPUTER CHOOSE A CARD - Cason
                 chosenCard = "NA";
 
             }
@@ -278,7 +278,9 @@ public class HoneyBuns {
     } // End of discardCard()
 
     // TODO: SOMEHOME DETEMINE NEXT PLAYER
-    static void nextPlayer(){}
+    static void nextPlayer(){
+
+    }
 
     /***************************  Debug Functions  ***************************************/
     static void printArrayList(ArrayList<String> arrayList){
