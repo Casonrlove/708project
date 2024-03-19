@@ -66,7 +66,7 @@ public class HoneyBuns {
         while(rule5(/* Might need to update the inputs here */)){ // While game is not Won
             
             // 4. Play Cards
-            
+            // Choose a Card first, then play 
             String chosenCard = "";
             if(currentPlayer == userPlayer){ 
 
@@ -83,7 +83,7 @@ public class HoneyBuns {
             
             
 
-            
+            // PLAY CARDS BELOW 
             if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){
                 /* Card Being Played matches the Suite or Number of top of discard pile */ 
                
@@ -97,7 +97,7 @@ public class HoneyBuns {
 
             }
 
-            // PLAY CARDS BELOW 
+            
         
 
 
@@ -105,11 +105,11 @@ public class HoneyBuns {
             // Order could be User 1-> Computer 2-> Comp 3 -> Comp 4  Then loop back 
             // So, if we know currentPlayer , then we know the next player
             nextPlayer(currentPlayer, userPlayer,computerPlayer2,computerPlayer3,computerPlayer4);
-        }
+        } // End of While(Game is not WON)
 
         
 
-    }   
+    } // End of PlayGame()   
     //-----------IMPLEMENT CARDS-----------//
     // all game flow implemented here
 
