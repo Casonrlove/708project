@@ -77,6 +77,22 @@ public class HoneyBuns {
             }else { // CurrentPlayer is a computer, therefore we must choose how they play their turn 
 
                 // TODO: HAVE COMPUTER CHOOSE A CARD - Cason
+                boolean discard = false; //set true if a card was discarded
+                for (int i = 0; i < userPlayer.size(); i++) 
+                {
+                    //----------PLAY A CARD----------//
+                    if( discardPile.get(0).charAt(0) == currentPlayer.get(i).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(i).charAt(1) )
+                    {
+                        chosenCard = discardPile.get(i);
+                        discardCard(chosenCard, discardPile);
+                        discard = true;
+                    }
+                    //----------DRAW A CARD----------//
+                    if(!discard)
+                    {
+                        drawCard(currentPlayer, discardPile);
+                    }
+                }
                 chosenCard = "NA";
 
             }
