@@ -76,7 +76,23 @@ public class HoneyBuns {
 
             }else { // CurrentPlayer is a computer, therefore we must choose how they play their turn 
 
-                // TODO: HAVE COMPUTER CHOOSE A CARD
+                // TODO: HAVE COMPUTER CHOOSE A CARD - Cason
+                boolean discard = false; //set true if a card was discarded
+                for (int i = 0; i < userPlayer.size(); i++) 
+                {
+                    //----------PLAY A CARD----------//
+                    if( discardPile.get(0).charAt(0) == currentPlayer.get(i).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(i).charAt(1) )
+                    {
+                        chosenCard = discardPile.get(i);
+                        discardCard(chosenCard, discardPile);
+                        discard = true;
+                    }
+                    //----------DRAW A CARD----------//
+                    if(!discard)
+                    {
+                        drawCard(currentPlayer, discardPile);
+                    }
+                }
                 chosenCard = "NA";
 
             }
@@ -275,7 +291,7 @@ public class HoneyBuns {
         discardDeck.add(0,discardCard);
     } // End of discardCard()
 
-    /**
+  /**
      * Updates Current Player to the next player
      * @param currDeck
      * @param player1Deck
@@ -293,10 +309,8 @@ public class HoneyBuns {
         }else if(currDeck == player4Deck){
             currDeck = player1Deck;
         }
-
     }
-
-    /***************************  Debug Functions  ***************************************/
+  /***************************  Debug Functions  ***************************************/
     static void printArrayList(ArrayList<String> arrayList){
         for(int i = 0; i < arrayList.size();i++){
             System.out.print(arrayList.get(i) + " ");
@@ -305,3 +319,4 @@ public class HoneyBuns {
     }
 
 }
+ 
