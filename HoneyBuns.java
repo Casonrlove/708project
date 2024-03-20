@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.sound.sampled.SourceDataLine;
 
@@ -14,9 +15,8 @@ public class HoneyBuns {
     public static void main(String[] args) {
         //----------CALL CARD FUNCTION----------//
         // leave blank til end //
-        playgame();
     }
-
+    
     static void playgame(){
         /*
             Game Play
@@ -65,7 +65,7 @@ public class HoneyBuns {
 
 
         // Start The Game 
-        while(rule5(/* Might need to update the inputs here */)){ // While game is not Won
+       while(rule5(currentPlayer)==false){ // While game is not Won
 
             if (player == 4) { //if the fourth player played last turn, it goes back to the first player.
                 player = 1;
@@ -95,17 +95,37 @@ public class HoneyBuns {
             drawSomeCards = 0;
             
             // 4. Play Cards
-            
+            // Choose a Card first, then play 
             String chosenCard = "";
             if(currentPlayer == userPlayer){ 
 
                 // TODO: PROMPT USER TO CHOOSE A CARD SOMEHOW
+                Scanner scnr = new Scanner (System.in);
+                System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + ": ");
+                int chosenCardNum = scnr.nextInt();
+                chosenCard = userPlayer.get(chosenCardNum-1);
                 // Show a prompt for user to choose their card or something
-                chosenCard = "NA";
+                //chosenCard = "NA";
 
             }else { // CurrentPlayer is a computer, therefore we must choose how they play their turn 
 
-                // TODO: HAVE COMPUTER CHOOSE A CARD
+                // TODO: HAVE COMPUTER CHOOSE A CARD - Cason
+                boolean discard = false; //set true if a card was discarded
+                for (int i = 0; i < userPlayer.size(); i++) 
+                {
+                    //----------PLAY A CARD----------//
+                    if( discardPile.get(0).charAt(0) == currentPlayer.get(i).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(i).charAt(1) )
+                    {
+                        chosenCard = discardPile.get(i);
+                        discardCard(chosenCard, discardPile);
+                        discard = true;
+                    }
+                    //----------DRAW A CARD----------//
+                    if(!discard)
+                    {
+                        drawCard(currentPlayer, discardPile);
+                    }
+                }
                 chosenCard = "NA";
 
             }
@@ -114,9 +134,10 @@ public class HoneyBuns {
             if ((chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '1') || (chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '2')){
                 drawSomeCards =+ 3; 
             } 
+         
+         //rule 2. If you put down a Jack, the next player will draw 1 card.
+          if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){ 
 
-            //rule 2. If you put down a Jack, the next player will draw 1 card.
-            if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){ 
                 /* Card Being Played matches the Suite or Number of top of discard pile */ 
                 // Rule 7 Applies
 
@@ -133,19 +154,19 @@ public class HoneyBuns {
 
             }
 
-            // PLAY CARDS BELOW 
+            
         
 
 
-            // 6. Play Next Player TODO: IMPLEMENT BELOW ( )
+            // 6. Play Next Player 
             // Order could be User 1-> Computer 2-> Comp 3 -> Comp 4  Then loop back 
             // So, if we know currentPlayer , then we know the next player
-            player++;
+         
+         player++;
+         // nextPlayer(currentPlayer, userPlayer,computerPlayer2,computerPlayer3,computerPlayer4);
         }
-
-        
-
-    }   
+     
+    } // End of PlayGame()   
     //-----------IMPLEMENT CARDS-----------//
     // all game flow implemented here
 
@@ -160,8 +181,15 @@ public class HoneyBuns {
 
     //----------IMPLEMENT RULE5&6----------//
     // rules 5 and 6 are implemented here
-    static boolean rule5(){ return true;} // <-- To Test Program
+    //Emmanuel Tobias
+    // rule 5 - whoever runs out of cards first wins
+    static boolean rule5(ArrayList<String> UserHand){
+        if (UserHand.size() == 0) {
+            return true;
+        } else return false;
+    } // <-- To Test Program
     // hola 
+    //rule 6 - person of your choice draws card on a played ace
     //----------IMPLEMENT RULE7&8----------//
     // rules 7 and 8 are implemented here
     
@@ -193,8 +221,6 @@ public class HoneyBuns {
          * 2. Remove the card at that index from the discardDeck
          * 3. Add that card to end of drawDeck
          */
-
-         System.out.println("TEST"+ (int)(Math.random() * (1) ));
 
          while(discardDeck.size() > 1){
             int randomInt = (int)(Math.random() * (discardDeck.size()-1) ) + 1 ; // Make sure we don't remove first card of discard pile
@@ -332,11 +358,27 @@ public class HoneyBuns {
     static void discardCard(String discardCard, ArrayList<String> discardDeck){
         discardDeck.add(0,discardCard);
     } // End of discardCard()
-
-    // TODO: SOMEHOW DETERMINE NEXT PLAYER
-    static void nextPlayer(){}
-
-    /***************************  Debug Functions  ***************************************/
+  
+  /**
+     * Updates Current Player to the next player
+     * @param currDeck
+     * @param player1Deck
+     * @param player2Deck
+     * @param player3Deck
+     * @param player4Deck
+     */
+    static void nextPlayer(ArrayList<String> currDeck,ArrayList<String> player1Deck,ArrayList<String> player2Deck,ArrayList<String> player3Deck,ArrayList<String> player4Deck){
+        if(currDeck == player1Deck){
+            currDeck = player2Deck;
+        }else if(currDeck == player2Deck){
+            currDeck = player3Deck;
+        }else if(currDeck == player3Deck){
+            currDeck = player4Deck;
+        }else if(currDeck == player4Deck){
+            currDeck = player1Deck;
+        }
+    }
+  /***************************  Debug Functions  ***************************************/
     static void printArrayList(ArrayList<String> arrayList){
         for(int i = 0; i < arrayList.size();i++){
             System.out.print(arrayList.get(i) + " ");
@@ -345,3 +387,4 @@ public class HoneyBuns {
     }
 
 }
+ 
