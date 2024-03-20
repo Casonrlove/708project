@@ -76,7 +76,7 @@ public class HoneyBuns {
                 int chosenCardNum = scnr.nextInt();
                 chosenCard = userPlayer.get(chosenCardNum-1);
                 // Show a prompt for user to choose their card or something
-                chosenCard = "NA";
+                //chosenCard = "NA";
 
             }else { // CurrentPlayer is a computer, therefore we must choose how they play their turn 
 
