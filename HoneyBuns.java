@@ -218,15 +218,15 @@ public class HoneyBuns {
         }
 
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 2
-            player1Deck.add(drawingPile.get(i));    
+            player2Deck.add(drawingPile.get(i));    
         }
 
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 3
-            player1Deck.add(drawingPile.get(i));    
+            player3Deck.add(drawingPile.get(i));    
         }
 
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 4
-            player1Deck.add(drawingPile.get(i));    
+            player4Deck.add(drawingPile.get(i));    
         }
     }
 
