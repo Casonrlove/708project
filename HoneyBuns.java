@@ -97,7 +97,7 @@ public class HoneyBuns {
             /******************************** Game Play Below **********************************/
             /***********************************************************************************/
             String chosenCard = "";
-            //----------USER GAMEPLAY----------//
+            //------------------------------USER GAMEPLAY------------------------------//
             if(currentPlayer == userPlayer){ 
 
                 // TODO: PROMPT USER TO CHOOSE A CARD SOMEHOW
@@ -132,14 +132,13 @@ public class HoneyBuns {
                     drawCard(currentPlayer, discardPile);
                 }
 
-            //----------NPC GAMEPLAY----------//
+            //------------------------------NPC GAMEPLAY------------------------------//
             }else {
 
-                // TODO: HAVE COMPUTER CHOOSE A CARD - Cason
                 boolean discard = false; //set true if a card was discarded
                 for (int i = 0; i < currentPlayer.size(); i++)
                 {
-                    //----------PLAY A CARD----------//
+                    //----------CHECK IF CARD CAN BE DISCARDED----------//
                     if( discardPile.get(0).charAt(0) == currentPlayer.get(i).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(i).charAt(1) )
                     {
                         chosenCard = currentPlayer.get(i);
@@ -154,22 +153,23 @@ public class HoneyBuns {
                     }
                 }
                 chosenCard = "NA";
-
             }
-            
+            /******************************** Game Play Above **********************************/
+            /***********************************************************************************/
+
             //rule 1. If you put down a joker, the next player will draw 3 cards.
             if ((chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '1') || (chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '2')){
-                drawSomeCards =+ 3; 
-            } 
-         
+                drawSomeCards =+ 3;
+            }
+        
          //rule 2. If you put down a Jack, the next player will draw 1 card.
-          if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){ 
+            if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){
 
-                /* Card Being Played matches the Suite or Number of top of discard pile */ 
+                /* Card Being Played matches the Suite or Number of top of discard pile */
                 // Rule 7 Applies
 
                 if (chosenCard.charAt(1) == 'J') {
-                    drawSomeCards =+ 1; 
+                    drawSomeCards =+ 1;
                 }
 
                 // Play Card by removing card from the player deck , and inserting to the top of dicard pile
@@ -204,7 +204,37 @@ public class HoneyBuns {
 
     //----------IMPLEMENT RULE3&4----------//
     // rules 3 and 4 are implemented here
+    // TODO: RULE3
+    public static boolean rule3()
+    {
+        System.out.println("\n\n**********TRIVIA TIME**********");
+        String output_message = "Which of the following options is a line from Harry Potter?" +
+                                "Happiness can be found, even in the darkest of times, if one only remembers to turn on the light."+
+                                "It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."+
+                                "Do not pity the dead, Harry. Pity the living, and above all, those who live without love."+
+                                "Wit beyond measure is man's greatest treasure.";
+        Scanner scnr2 = new Scanner(System.in);
+        int number_selected = scnr2.nextInt();
+        if (number_selected == 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
+    // TODO: RULE4
+    public static String rule4()
+    {
+        System.out.println("\n\nWhat would you like the next suit to be? \ns for spade\n h for hearts \nc for clubs\nd for diamonds");
+        Scanner scnr3 = new Scanner(System.in);
+        String next_suit = scnr3.nextLine();
+        
+
+        return "spade";
+    }
 
     //----------IMPLEMENT RULE5&6----------//
     // rules 5 and 6 are implemented here
