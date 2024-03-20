@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.sound.sampled.SourceDataLine;
 
@@ -14,9 +15,8 @@ public class HoneyBuns {
     public static void main(String[] args) {
         //----------CALL CARD FUNCTION----------//
         // leave blank til end //
-        playgame();
     }
-
+    
     static void playgame(){
         /*
             Game Play
@@ -63,7 +63,7 @@ public class HoneyBuns {
         currentPlayer = userPlayer; // User Player Goes First 
 
         // Start The Game 
-        while(rule5(/* Might need to update the inputs here */)){ // While game is not Won
+        while(rule5(currentPlayer)==false){ // While game is not Won
             
             // 4. Play Cards
             // Choose a Card first, then play 
@@ -71,8 +71,12 @@ public class HoneyBuns {
             if(currentPlayer == userPlayer){ 
 
                 // TODO: PROMPT USER TO CHOOSE A CARD SOMEHOW
+                Scanner scnr = new Scanner (System.in);
+                System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + ": ");
+                int chosenCardNum = scnr.nextInt();
+                chosenCard = userPlayer.get(chosenCardNum-1);
                 // Show a prompt for user to choose their card or something
-                chosenCard = "NA";
+                //chosenCard = "NA";
 
             }else { // CurrentPlayer is a computer, therefore we must choose how they play their turn 
 
@@ -141,8 +145,15 @@ public class HoneyBuns {
 
     //----------IMPLEMENT RULE5&6----------//
     // rules 5 and 6 are implemented here
-    static boolean rule5(){ return true;} // <-- To Test Program
+    //Emmanuel Tobias
+    // rule 5 - whoever runs out of cards first wins
+    static boolean rule5(ArrayList<String> UserHand){
+        if (UserHand.size() == 0) {
+            return true;
+        } else return false;
+    } // <-- To Test Program
     // hola 
+    //rule 6 - person of your choice draws card on a played ace
     //----------IMPLEMENT RULE7&8----------//
     // rules 7 and 8 are implemented here
     
