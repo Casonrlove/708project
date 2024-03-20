@@ -119,6 +119,7 @@ public class HoneyBuns {
                         chosenCard = discardPile.get(i);
                         discardCard(chosenCard, discardPile);
                         discard = true;
+                        break;
                     }
                     //----------DRAW A CARD----------//
                     if(!discard)
