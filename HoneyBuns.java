@@ -67,7 +67,7 @@ public class HoneyBuns {
 
         // Start The Game 
        while(rule5(currentPlayer)==false){ // While game is not Won
-            System.out.println("Player " + player);
+           
             if (player == 4) { //if the fourth player played last turn, it goes back to the first player.
                 player = 1;
             }
@@ -102,14 +102,18 @@ public class HoneyBuns {
 
                 // TODO: PROMPT USER TO CHOOSE A CARD SOMEHOW
                 Scanner scnr = new Scanner (System.in);
+                //print discard pile arraylist
+                System.out.println("Your Cards: ");
+                printArrayList(userPlayer);
+                System.out.println("Top Of Discard Pile: " + discardPile.get(0));
+
                 System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + ": ");
                 int chosenCardNum = scnr.nextInt();
 
-                System.out.println(chosenCardNum-1);
                 printArrayList(userPlayer);
 
                 chosenCard = userPlayer.get(chosenCardNum-1);
-                System.out.println("DONE");
+              
                 // Show a prompt for user to choose their card or something
                 //chosenCard = "NA";
 
