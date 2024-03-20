@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.sound.sampled.SourceDataLine;
-
 /*
  *  
  *  Team: 41Honeybuns
@@ -96,32 +94,50 @@ public class HoneyBuns {
             drawSomeCards = 0;
             
             // 4. Play Cards
-            // Choose a Card first, then play 
+            /******************************** Game Play Below **********************************/
+            /***********************************************************************************/
             String chosenCard = "";
+            //----------USER GAMEPLAY----------//
             if(currentPlayer == userPlayer){ 
 
                 // TODO: PROMPT USER TO CHOOSE A CARD SOMEHOW
                 Scanner scnr = new Scanner (System.in);
-                //print discard pile arraylist
+                //----------PRINT USER'S HAND, TOP OF DISCARD PILE----------//
                 System.out.println("Your Cards: ");
                 printArrayList(userPlayer);
                 System.out.println("Top Of Discard Pile: " + discardPile.get(0));
-
-                System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + ": ");
+                //----------PROMPT USER----------//
+                System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + "): ");
                 int chosenCardNum = scnr.nextInt();
 
-                printArrayList(userPlayer);
 
+                //----------CHECK TO SEE IF DRAW CARD SELECTED----------//
+                if (chosenCardNum == 55) 
+                {
+                    drawCard(currentPlayer, discardPile);
+                }
                 chosenCard = userPlayer.get(chosenCardNum-1);
-              
-                // Show a prompt for user to choose their card or something
-                //chosenCard = "NA";
 
-            }else { // CurrentPlayer is a computer, therefore we must choose how they play their turn 
+
+                //----------CHECK IF CARD CAN BE DISCARDED----------//
+                boolean discard = false;
+                if( discardPile.get(0).charAt(0) == currentPlayer.get(chosenCardNum-1).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(chosenCardNum-1).charAt(1) )
+                {
+                    discardCard(chosenCard, discardPile);
+                    discard = true;
+                }
+                //----------DRAW A CARD----------//
+                if(!discard)
+                {
+                    drawCard(currentPlayer, discardPile);
+                }
+
+            //----------NPC GAMEPLAY----------//
+            }else {
 
                 // TODO: HAVE COMPUTER CHOOSE A CARD - Cason
                 boolean discard = false; //set true if a card was discarded
-                for (int i = 0; i < currentPlayer.size(); i++) 
+                for (int i = 0; i < currentPlayer.size(); i++)
                 {
                     //----------PLAY A CARD----------//
                     if( discardPile.get(0).charAt(0) == currentPlayer.get(i).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(i).charAt(1) )
