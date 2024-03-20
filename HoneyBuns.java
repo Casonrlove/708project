@@ -2,11 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
- *  
+ *
  *  Team: 41Honeybuns
- *   
+ *
  *  Team Members: Daniel Beltran, Jay Park, Cason Love, Emmanuel Tobias
- *  
+ *
  */
 public class HoneyBuns {
     
