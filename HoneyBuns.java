@@ -15,6 +15,7 @@ public class HoneyBuns {
     public static void main(String[] args) {
         //----------CALL CARD FUNCTION----------//
         // leave blank til end //
+        playgame();
     }
     
     static void playgame(){
@@ -51,7 +52,7 @@ public class HoneyBuns {
         // printArrayList(drawPile);
 
         // 2. Distribute Cards
-        distributeCards(drawPile, userPlayer, computerPlayer2, computerPlayer3, computerPlayer4);
+        distributeCards(drawPile, discardPile, userPlayer, computerPlayer2, computerPlayer3, computerPlayer4);
 
         // 3. Create Initial Discard Pile
         createInitialDiscardPile(drawPile,discardPile);
@@ -90,7 +91,7 @@ public class HoneyBuns {
             }
 
             for (int index = 0; index < drawSomeCards; index++) {
-                currentPlayer.add(drawPile.get(index));
+                currentPlayer.add(drawCard(drawPile,discardPile));
             }
             drawSomeCards = 0;
             
@@ -239,21 +240,21 @@ public class HoneyBuns {
 
     //distributes 7 cards to each player, taking out the cards from the main pile/draw pile. 
 
-    static void distributeCards(ArrayList<String> drawingPile,  ArrayList<String> player1Deck, ArrayList<String> player2Deck, ArrayList<String> player3Deck, ArrayList<String> player4Deck) {
+    static void distributeCards(ArrayList<String> drawingPile, ArrayList<String> discardPile,  ArrayList<String> player1Deck, ArrayList<String> player2Deck, ArrayList<String> player3Deck, ArrayList<String> player4Deck) {
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 1
-            player1Deck.add(drawingPile.get(i));    
+            player1Deck.add(drawCard(drawingPile,discardPile));    
         }
 
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 2
-            player2Deck.add(drawingPile.get(i));    
+            player2Deck.add(drawCard(drawingPile,discardPile));    
         }
 
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 3
-            player3Deck.add(drawingPile.get(i));    
+            player3Deck.add(drawCard(drawingPile,discardPile));    
         }
 
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 4
-            player4Deck.add(drawingPile.get(i));    
+            player4Deck.add(drawCard(drawingPile,discardPile));    
         }
     }
 
