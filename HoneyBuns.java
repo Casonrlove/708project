@@ -116,24 +116,38 @@ public class HoneyBuns {
                 if (chosenCardNum == 55)
                 {
                     currentPlayer.add(drawCard(drawPile,discardPile));
-                    continue;
+                    // continue;
                 }
-                chosenCard = userPlayer.get(chosenCardNum-1);
+                //----------USER DOESN'T SELECT TO DRAW A CARD----------//
+                else
+                {
+                    chosenCard = userPlayer.get(chosenCardNum-1);
 
+                    
+                    //----------CHECK IF CARD CAN BE DISCARDED----------//
+                    boolean discard = false;
+                    if( discardPile.get(0).charAt(0) == currentPlayer.get(chosenCardNum-1).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(chosenCardNum-1).charAt(1)
+                        || currentPlayer.get(chosenCardNum-1).charAt(1) == 'K')
+                    {
+                        discardCard(chosenCard, discardPile);
+                        discard = true;
+                    }
+                    //----------DRAW A CARD----------//
+                    if(!discard)
+                    {
+                        currentPlayer.add(drawCard(drawPile,discardPile));
+                    }
+                    
+                    //----------RULE3----------//
+                    if(discard && ( currentPlayer.get(chosenCardNum-1).charAt(1) == 'Q'))
+                    {
+                        if (rule3())
+                        {
+                            discardCard(chosenCard, discardPile);
+                        }
+                    }
+                }
                 
-                //----------CHECK IF CARD CAN BE DISCARDED----------//
-                boolean discard = false;
-                if( discardPile.get(0).charAt(0) == currentPlayer.get(chosenCardNum-1).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(chosenCardNum-1).charAt(1)
-                    || currentPlayer.get(chosenCardNum-1).charAt(1) == 'K')
-                {
-                    discardCard(chosenCard, discardPile);
-                    discard = true;
-                }
-                //----------DRAW A CARD----------//
-                if(!discard)
-                {
-                    currentPlayer.add(drawCard(drawPile,discardPile));
-                }
 
             //------------------------------NPC GAMEPLAY------------------------------//
             }else {
@@ -193,11 +207,11 @@ public class HoneyBuns {
             // 6. Play Next Player
             // Order could be User 1-> Computer 2-> Comp 3 -> Comp 4  Then loop back
             // So, if we know currentPlayer , then we know the next player
-         
-         player++;
+        
+        player++;
          // nextPlayer(currentPlayer, userPlayer,computerPlayer2,computerPlayer3,computerPlayer4);
         }
-     
+    
     } // End of PlayGame()
     //-----------IMPLEMENT CARDS-----------//
     // all game flow implemented here
@@ -213,11 +227,11 @@ public class HoneyBuns {
     public static boolean rule3()
     {
         System.out.println("\n\n**********TRIVIA TIME**********");
-        String output_message = "Which of the following options is a line from Harry Potter?" +
-                                "Happiness can be found, even in the darkest of times, if one only remembers to turn on the light."+
-                                "It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."+
-                                "Do not pity the dead, Harry. Pity the living, and above all, those who live without love."+
-                                "Wit beyond measure is man's greatest treasure.";
+        String output_message = "Which of the following options is a line from Harry Potter?\n\n" +
+                                "1.Happiness can be found, even in the darkest of times, if one only remembers to turn on the light.\n"+
+                                "2.It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends.\n"+
+                                "3.Do not pity the dead, Harry. Pity the living, and above all, those who live without love.\n"+
+                                "4.Wit beyond measure is man's greatest treasure.\n";
         System.out.println(output_message);
         Scanner scnr2 = new Scanner(System.in);
         int number_selected = scnr2.nextInt();
