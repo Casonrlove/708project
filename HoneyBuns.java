@@ -29,12 +29,12 @@ public class HoneyBuns {
                         This card is a wildcard and can be placed for your turn, the next player can also place any card after since the card does not have a suit or number.
                     If a Queen is placed, Then a trivia question is given, and if answered correctly you may place another card.
                     If an Ace is placed, then you can choose any player to draw a card
-                        This is the end of your turn, the next player will go next.. 
+                        This is the end of your turn, the next player will go next..
             5. If at any point there are no more cards in the draw pile, then the discard pile is shuffled, and all except the top card is inserted back to the draw pile.
             6. Next Player
          */
 
-        /* Initial Array Lists  */ 
+        /* Initial Array Lists  */
         ArrayList<String> drawPile = new ArrayList<String>();    // Assumption: The first card in the Draw Pile is the Top card
         ArrayList<String> discardPile = new ArrayList<String>(); // Assumption: The first card in the discard Pile is the Top card
         ArrayList<String> currentPlayer; // This will point to the deck of the current player
@@ -45,7 +45,7 @@ public class HoneyBuns {
         ArrayList<String> computerPlayer3 = new ArrayList<String>();
         ArrayList<String> computerPlayer4 = new ArrayList<String>();
 
-        // 1. Create and Shuffle Deck 
+        // 1. Create and Shuffle Deck
         createShuffledDrawPile(drawPile);
         // printArrayList(drawPile);
 
@@ -57,15 +57,15 @@ public class HoneyBuns {
         //printArrayList(drawPile);
         //printArrayList(discardPile);
 
-        currentPlayer = userPlayer; // User Player Goes First 
+        currentPlayer = userPlayer; // User Player Goes First
 
         int player = 1; // initializes player variable
         int drawSomeCards = 0; //initializes the drawSomeCards variable shows how many cards the currentplayer will draw.
 
 
-        // Start The Game 
+        // Start The Game
        while(rule5(currentPlayer)==false){ // While game is not Won
-           
+        
             if (player == 4) { //if the fourth player played last turn, it goes back to the first player.
                 player = 1;
             }
@@ -97,8 +97,9 @@ public class HoneyBuns {
             /******************************** Game Play Below **********************************/
             /***********************************************************************************/
             String chosenCard = "";
+            boolean drawCard = false; //boolean to set true if drawing a card so that we can see if we can skip rest of game logic for the iteration
             //------------------------------USER GAMEPLAY------------------------------//
-            if(currentPlayer == userPlayer){ 
+            if(currentPlayer == userPlayer){
 
                 // TODO: PROMPT USER TO CHOOSE A CARD SOMEHOW
                 Scanner scnr = new Scanner (System.in);
@@ -112,16 +113,18 @@ public class HoneyBuns {
 
 
                 //----------CHECK TO SEE IF DRAW CARD SELECTED----------//
-                if (chosenCardNum == 55) 
+                if (chosenCardNum == 55)
                 {
-                    drawCard(currentPlayer, discardPile);
+                    currentPlayer.add(drawCard(drawPile,discardPile));
+                    continue;
                 }
                 chosenCard = userPlayer.get(chosenCardNum-1);
 
-
+                
                 //----------CHECK IF CARD CAN BE DISCARDED----------//
                 boolean discard = false;
-                if( discardPile.get(0).charAt(0) == currentPlayer.get(chosenCardNum-1).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(chosenCardNum-1).charAt(1) )
+                if( discardPile.get(0).charAt(0) == currentPlayer.get(chosenCardNum-1).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(chosenCardNum-1).charAt(1)
+                    || currentPlayer.get(chosenCardNum-1).charAt(1) == 'K')
                 {
                     discardCard(chosenCard, discardPile);
                     discard = true;
@@ -129,7 +132,7 @@ public class HoneyBuns {
                 //----------DRAW A CARD----------//
                 if(!discard)
                 {
-                    drawCard(currentPlayer, discardPile);
+                    currentPlayer.add(drawCard(drawPile,discardPile));
                 }
 
             //------------------------------NPC GAMEPLAY------------------------------//
@@ -139,7 +142,8 @@ public class HoneyBuns {
                 for (int i = 0; i < currentPlayer.size(); i++)
                 {
                     //----------CHECK IF CARD CAN BE DISCARDED----------//
-                    if( discardPile.get(0).charAt(0) == currentPlayer.get(i).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(i).charAt(1) )
+                    if( discardPile.get(0).charAt(0) == currentPlayer.get(i).charAt(0) || discardPile.get(0).charAt(1) == currentPlayer.get(i).charAt(1)
+                        || currentPlayer.get(i).charAt(1) == 'K')
                     {
                         chosenCard = currentPlayer.get(i);
                         discardCard(chosenCard, discardPile);
@@ -149,7 +153,7 @@ public class HoneyBuns {
                     //----------DRAW A CARD----------//
                     if(!discard)
                     {
-                        drawCard(currentPlayer, discardPile);
+                        currentPlayer.add(drawCard(drawPile,discardPile));
                     }
                 }
                 chosenCard = "NA";
@@ -175,25 +179,26 @@ public class HoneyBuns {
                 // Play Card by removing card from the player deck , and inserting to the top of dicard pile
                 rule7(chosenCard, currentPlayer,discardPile);
                 
-            }else if(false/* Conditions for Other Rule */){
-                
-                // etc..
-
             }
+            // else if(false/* Conditions for Other Rule */){
+                
+            //     // etc..
+
+            // }
 
             
         
 
 
-            // 6. Play Next Player 
-            // Order could be User 1-> Computer 2-> Comp 3 -> Comp 4  Then loop back 
+            // 6. Play Next Player
+            // Order could be User 1-> Computer 2-> Comp 3 -> Comp 4  Then loop back
             // So, if we know currentPlayer , then we know the next player
          
          player++;
          // nextPlayer(currentPlayer, userPlayer,computerPlayer2,computerPlayer3,computerPlayer4);
         }
      
-    } // End of PlayGame()   
+    } // End of PlayGame()
     //-----------IMPLEMENT CARDS-----------//
     // all game flow implemented here
 
@@ -213,8 +218,10 @@ public class HoneyBuns {
                                 "It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."+
                                 "Do not pity the dead, Harry. Pity the living, and above all, those who live without love."+
                                 "Wit beyond measure is man's greatest treasure.";
+        System.out.println(output_message);
         Scanner scnr2 = new Scanner(System.in);
         int number_selected = scnr2.nextInt();
+        scnr2.close();
         if (number_selected == 2)
         {
             return true;
@@ -226,14 +233,9 @@ public class HoneyBuns {
     }
 
     // TODO: RULE4
-    public static String rule4()
+    public static void rule4()
     {
         System.out.println("\n\nWhat would you like the next suit to be? \ns for spade\n h for hearts \nc for clubs\nd for diamonds");
-        Scanner scnr3 = new Scanner(System.in);
-        String next_suit = scnr3.nextLine();
-        
-
-        return "spade";
     }
 
     //----------IMPLEMENT RULE5&6----------//
@@ -245,24 +247,24 @@ public class HoneyBuns {
             return true;
         } else return false;
     } // <-- To Test Program
-    // hola 
+    // hola
     //rule 6 - person of your choice draws card on a played ace
     //----------IMPLEMENT RULE7&8----------//
     // rules 7 and 8 are implemented here
     
-    /* 
-     *  Rule 7 - Daniel B. 
+    /*
+     *  Rule 7 - Daniel B.
      * A person can play a card with the same number or same suit that matches the top of the discard pile.
      */
 
-     static void rule7 (String cardPlayed,ArrayList<String> playerDeck, ArrayList<String> discardDeck){
+    static void rule7 (String cardPlayed,ArrayList<String> playerDeck, ArrayList<String> discardDeck){
         
         /* Playing Card  */
         playerDeck.remove(cardPlayed);
         discardDeck.add( 0,cardPlayed);
 
 
-     }
+    }
 
     /**
      *  Rule 8 - Daniel B.
@@ -279,45 +281,45 @@ public class HoneyBuns {
          * 3. Add that card to end of drawDeck
          */
 
-         while(discardDeck.size() > 1){
+        while(discardDeck.size() > 1){
             int randomInt = (int)(Math.random() * (discardDeck.size()-1) ) + 1 ; // Make sure we don't remove first card of discard pile
 
             
             String cardRemoved = discardDeck.remove(randomInt);
             drawDeck.add(cardRemoved);
 
-         }
+        }
 
 
     } // End of rule8()
 
     /******************************** Game Functions Below **********************************/
 
-    //distributes 7 cards to each player, taking out the cards from the main pile/draw pile. 
+    //distributes 7 cards to each player, taking out the cards from the main pile/draw pile.
 
     static void distributeCards(ArrayList<String> drawingPile, ArrayList<String> discardPile,  ArrayList<String> player1Deck, ArrayList<String> player2Deck, ArrayList<String> player3Deck, ArrayList<String> player4Deck) {
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 1
-            player1Deck.add(drawCard(drawingPile,discardPile));    
+            player1Deck.add(drawCard(drawingPile,discardPile));
         }
 
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 2
-            player2Deck.add(drawCard(drawingPile,discardPile));    
+            player2Deck.add(drawCard(drawingPile,discardPile));
         }
 
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 3
-            player3Deck.add(drawCard(drawingPile,discardPile));    
+            player3Deck.add(drawCard(drawingPile,discardPile));
         }
 
         for (int i = 0; i < 7; i++) { //distributes 7 cards to player 4
-            player4Deck.add(drawCard(drawingPile,discardPile));    
+            player4Deck.add(drawCard(drawingPile,discardPile));
         }
     }
 
 
     /*
      * createShuffledDrawPile(ArrayList<String> arrayList)
-     * 
-     * Similar to previous programming assignments, This method works in 3 steps 
+     *
+     * Similar to previous programming assignments, This method works in 3 steps
      *  1. Create an Array Deck
      *  2. Shuffle Deck
      *  3. Convert Shuffled Array Deck Into  Array List Deck by inserting card by card
@@ -373,7 +375,7 @@ public class HoneyBuns {
 
     /**
      * Draws a Card, and inserts into Discard Deck
-     * 
+     *
      * @param drawDeck
      * @param discardDeck
      */
@@ -389,7 +391,7 @@ public class HoneyBuns {
      *  If draw pile is empty, will call Rule 8. If both decks are empry, returns "Empty"
      * @param drawDeck
      * @param discardDeck (Required for Rule 8)
-     * @return  Card, or "Empty" 
+     * @return  Card, or "Empty"
      */
     static String drawCard(ArrayList<String> drawDeck, ArrayList<String> discardDeck){
 
@@ -397,7 +399,7 @@ public class HoneyBuns {
             rule8(drawDeck,discardDeck);
         }
         
-        if(drawDeck.size() == 0){ // If still empty 
+        if(drawDeck.size() == 0){ // If still empty
             return "EMPTY";
         }
 
@@ -415,8 +417,8 @@ public class HoneyBuns {
     static void discardCard(String discardCard, ArrayList<String> discardDeck){
         discardDeck.add(0,discardCard);
     } // End of discardCard()
-  
-  /**
+
+    /**
      * Updates Current Player to the next player
      * @param currDeck
      * @param player1Deck
@@ -444,4 +446,3 @@ public class HoneyBuns {
     }
 
 }
- 
