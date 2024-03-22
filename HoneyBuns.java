@@ -189,24 +189,24 @@ public class HoneyBuns {
             if(!drawCard)
             {
                 //rule 1. If you put down a joker, the next player will draw 3 cards.
-                if ((chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '1') || (chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '2')){
-                    drawSomeCards =+ 3;
-                }
+                // if ((chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '1') || (chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '2')){
+                //     drawSomeCards =+ 3;
+                // }
             
                 //rule 2. If you put down a Jack, the next player will draw 1 card.
-                if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){
+                // if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){
 
                 /* Card Being Played matches the Suite or Number of top of discard pile */
                 // Rule 7 Applies
 
-                if (chosenCard.charAt(1) == 'J') {
-                    drawSomeCards =+ 1;
-                }
+                // if (chosenCard.charAt(1) == 'J') {
+                //     drawSomeCards =+ 1;
+                // }
 
                 // Play Card by removing card from the player deck , and inserting to the top of dicard pile
                 // rule7(chosenCard, currentPlayer,discardPile); screwing up the discardPile
                 
-            }
+            // }
             // else if(false/* Conditions for Other Rule */){
                 
             //     // etc..
