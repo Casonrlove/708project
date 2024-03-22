@@ -64,7 +64,7 @@ public class HoneyBuns {
 
 
         // Start The Game
-       while(rule5(currentPlayer)==false){ // While game is not Won
+        while(rule5(currentPlayer)==false){ // While game is not Won
         
             if (player == 5) { //if the fourth player played last turn, it goes back to the first player.
                 player = 1;
@@ -139,7 +139,7 @@ public class HoneyBuns {
                     }
                     
                     //----------RULE3----------//
-                    if(discard && ( currentPlayer.get(chosenCardNum-1).charAt(1) == 'Q'))
+                    if(discard && (  chosenCard.charAt(1) == 'Q')) //)currentPlayer.get(chosenCardNum-1).charAt(1)
                     {
                         if (rule3())
                         {
@@ -188,23 +188,23 @@ public class HoneyBuns {
 
             if(!drawCard)
             {
-                //rule 1. If you put down a joker, the next player will draw 3 cards.
+                // //rule 1. If you put down a joker, the next player will draw 3 cards.
                 // if ((chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '1') || (chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '2')){
                 //     drawSomeCards =+ 3;
                 // }
             
-                //rule 2. If you put down a Jack, the next player will draw 1 card.
+                // //rule 2. If you put down a Jack, the next player will draw 1 card.
                 // if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){
 
-                /* Card Being Played matches the Suite or Number of top of discard pile */
-                // Rule 7 Applies
+                // /* Card Being Played matches the Suite or Number of top of discard pile */
+                // // Rule 7 Applies
 
                 // if (chosenCard.charAt(1) == 'J') {
                 //     drawSomeCards =+ 1;
                 // }
 
-                // Play Card by removing card from the player deck , and inserting to the top of dicard pile
-                // rule7(chosenCard, currentPlayer,discardPile); screwing up the discardPile
+                // // Play Card by removing card from the player deck , and inserting to the top of dicard pile
+                // rule7(chosenCard, currentPlayer,discardPile); //screwing up the discardPile
                 
             // }
             // else if(false/* Conditions for Other Rule */){
@@ -227,11 +227,19 @@ public class HoneyBuns {
         chosenCard = "NA";
          // nextPlayer(currentPlayer, userPlayer,computerPlayer2,computerPlayer3,computerPlayer4);
         }
+        if (player == 5)
+        {
+            System.out.println("The game has been won by player 4 thanks for playing!");
+
+        }
+        else
+        {
+            System.out.println("The game has been won by player " + (player - 1) + " thanks for playing!");
+        }
+        
     
     } // End of PlayGame()
-    //-----------IMPLEMENT CARDS-----------//
-    // all game flow implemented here
-
+    
     // added this//
     //----------IMPLEMENT RULE1&2----------//
     // rules 1 and 2 are implemented here - JAY PARK
@@ -240,7 +248,7 @@ public class HoneyBuns {
     //----------IMPLEMENT RULE3&4----------//
     // rules 3 and 4 are implemented here
     // TODO: RULE3
-    public static boolean rule3()
+    static boolean rule3()
     {
         System.out.println("\n\n**********TRIVIA TIME**********");
         String output_message = "Which of the following options is a line from Harry Potter?\n\n" +
