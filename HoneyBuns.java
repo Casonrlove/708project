@@ -66,7 +66,7 @@ public class HoneyBuns {
         // Start The Game
        while(rule5(currentPlayer)==false){ // While game is not Won
         
-            if (player == 4) { //if the fourth player played last turn, it goes back to the first player.
+            if (player == 5) { //if the fourth player played last turn, it goes back to the first player.
                 player = 1;
             }
 
@@ -111,12 +111,11 @@ public class HoneyBuns {
                 System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + "): ");
                 int chosenCardNum = scnr.nextInt();
 
-
                 //----------CHECK TO SEE IF DRAW CARD SELECTED----------//
                 if (chosenCardNum == 55)
                 {
                     currentPlayer.add(drawCard(drawPile,discardPile));
-                    // continue;
+                    drawCard = true;
                 }
                 //----------USER DOESN'T SELECT TO DRAW A CARD----------//
                 else
@@ -130,6 +129,7 @@ public class HoneyBuns {
                         || currentPlayer.get(chosenCardNum-1).charAt(1) == 'K')
                     {
                         discardCard(chosenCard, discardPile);
+                        userPlayer.remove(chosenCard);
                         discard = true;
                     }
                     //----------DRAW A CARD----------//
@@ -143,7 +143,17 @@ public class HoneyBuns {
                     {
                         if (rule3())
                         {
+                            Scanner scnr4 = new Scanner (System.in);
+                            //----------PRINT USER'S HAND, TOP OF DISCARD PILE----------//
+                            System.out.println("You answered correctly! You get to discard an extra card!");
+                            System.out.println("Your Cards: ");
+                            printArrayList(userPlayer);
+                            //----------PROMPT USER----------//
+                            System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + "): ");
+                            int rule3num = scnr.nextInt();
+                            chosenCard = userPlayer.get(rule3num-1);
                             discardCard(chosenCard, discardPile);
+                            userPlayer.remove(chosenCard);
                         }
                     }
                 }
@@ -161,27 +171,30 @@ public class HoneyBuns {
                     {
                         chosenCard = currentPlayer.get(i);
                         discardCard(chosenCard, discardPile);
+                        currentPlayer.remove(currentPlayer.get(i));
                         discard = true;
                         break;
                     }
-                    //----------DRAW A CARD----------//
-                    if(!discard)
-                    {
-                        currentPlayer.add(drawCard(drawPile,discardPile));
-                    }
                 }
-                chosenCard = "NA";
+                //----------DRAW A CARD----------//
+                if(!discard)
+                {
+                    currentPlayer.add(drawCard(drawPile,discardPile));
+                }
+                
             }
             /******************************** Game Play Above **********************************/
             /***********************************************************************************/
 
-            //rule 1. If you put down a joker, the next player will draw 3 cards.
-            if ((chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '1') || (chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '2')){
-                drawSomeCards =+ 3;
-            }
-        
-         //rule 2. If you put down a Jack, the next player will draw 1 card.
-            if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){
+            if(!drawCard)
+            {
+                //rule 1. If you put down a joker, the next player will draw 3 cards.
+                if ((chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '1') || (chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '2')){
+                    drawSomeCards =+ 3;
+                }
+            
+                //rule 2. If you put down a Jack, the next player will draw 1 card.
+                if( discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)){
 
                 /* Card Being Played matches the Suite or Number of top of discard pile */
                 // Rule 7 Applies
@@ -191,7 +204,7 @@ public class HoneyBuns {
                 }
 
                 // Play Card by removing card from the player deck , and inserting to the top of dicard pile
-                rule7(chosenCard, currentPlayer,discardPile);
+                // rule7(chosenCard, currentPlayer,discardPile); screwing up the discardPile
                 
             }
             // else if(false/* Conditions for Other Rule */){
@@ -200,6 +213,8 @@ public class HoneyBuns {
 
             // }
 
+            }
+            
             
         
 
@@ -209,6 +224,7 @@ public class HoneyBuns {
             // So, if we know currentPlayer , then we know the next player
         
         player++;
+        chosenCard = "NA";
          // nextPlayer(currentPlayer, userPlayer,computerPlayer2,computerPlayer3,computerPlayer4);
         }
     
@@ -235,7 +251,6 @@ public class HoneyBuns {
         System.out.println(output_message);
         Scanner scnr2 = new Scanner(System.in);
         int number_selected = scnr2.nextInt();
-        scnr2.close();
         if (number_selected == 2)
         {
             return true;
