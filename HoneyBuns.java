@@ -104,7 +104,7 @@ public class HoneyBuns {
                 // TODO: PROMPT USER TO CHOOSE A CARD SOMEHOW
                 Scanner scnr = new Scanner (System.in);
                 //----------PRINT USER'S HAND, TOP OF DISCARD PILE----------//
-                System.out.println("Your Cards: ");
+                System.out.println("\nYour Cards: ");
                 printArrayList(userPlayer);
                 System.out.println("Top Of Discard Pile: " + discardPile.get(0));
                 //----------PROMPT USER----------//
@@ -149,11 +149,15 @@ public class HoneyBuns {
                             System.out.println("Your Cards: ");
                             printArrayList(userPlayer);
                             //----------PROMPT USER----------//
-                            System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + "): ");
+                            System.out.print("Pick an extra card to play (Enter # between 1 and " + userPlayer.size() + "): ");
                             int rule3num = scnr.nextInt();
                             chosenCard = userPlayer.get(rule3num-1);
                             discardCard(chosenCard, discardPile);
                             userPlayer.remove(chosenCard);
+                        }
+                        else
+                        {
+                            System.out.println("Incorrect! Try again next time!");
                         }
                     }
                 }
