@@ -2,11 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
- *
  *  Team: 41Honeybuns
- *
  *  Team Members: Daniel Beltran, Jay Park, Cason Love, Emmanuel Tobias
- *
  */
 public class HoneyBuns {
     
@@ -15,22 +12,6 @@ public class HoneyBuns {
     }
     
     static void playgame(){
-        /*
-            Game Play
-            1. Deck is shuffled
-            2. Each Player gets 7 cards
-            3. A card from the draw pile will be placed on the discard pile, this is now the top card on the discard pile.
-            4. User player goes first, will place a card that matches the suit or number of the top card on the discard pile, or may place a joker, or a king wild card. If the player does not have a card that can be placed, then they will draw a card and play that card if it is possible.
-                    If a joker is placed, then the next player draws 3 cards, this does not skip their turn.f
-                    If a Jack is placed, then the next player will draw 1 card, this does not skip their turn.
-                    If a King is placed,
-                        This card is a wildcard and can be placed for your turn, the next player can also place any card after since the card does not have a suit or number.
-                    If a Queen is placed, Then a trivia question is given, and if answered correctly you may place another card.
-                    If an Ace is placed, then you can choose any player to draw a card
-                        This is the end of your turn, the next player will go next..
-            5. If at any point there are no more cards in the draw pile, then the discard pile is shuffled, and all except the top card is inserted back to the draw pile.
-            6. Next Player
-         */
 
         /* Initial Array Lists  */
         ArrayList<String> drawPile = new ArrayList<String>();    // Assumption: The first card in the Draw Pile is the Top card
