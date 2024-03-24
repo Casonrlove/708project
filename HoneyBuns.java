@@ -23,7 +23,7 @@ public class HoneyBuns {
             2. Each Player gets 7 cards
             3. A card from the draw pile will be placed on the discard pile, this is now the top card on the discard pile.
             4. User player goes first, will place a card that matches the suit or number of the top card on the discard pile, or may place a joker, or a king wild card. If the player does not have a card that can be placed, then they will draw a card and play that card if it is possible.
-                    If a joker is placed, then the next player draws 3 cards, this does not skip their turn.f
+                    If a joker is placed, then the next player draws 3 cards, this does not skip their turn, and you can choose the suit.
                     If a Jack is placed, then the next player will draw 1 card, this does not skip their turn.
                     If a King is placed,
                         This card is a wildcard and can be placed for your turn, the next player can also place any card after since the card does not have a suit or number.
@@ -101,7 +101,6 @@ public class HoneyBuns {
             //------------------------------USER GAMEPLAY------------------------------//
             if(currentPlayer == userPlayer){
 
-                // TODO: PROMPT USER TO CHOOSE A CARD SOMEHOW
                 Scanner scnr = new Scanner (System.in);
                 //----------PRINT USER'S HAND, TOP OF DISCARD PILE----------//
                 System.out.println("\nYour Cards: ");
@@ -192,7 +191,7 @@ public class HoneyBuns {
 
             if(!drawCard)
             {
-                // //rule 1. If you put down a joker, the next player will draw 3 cards.
+                //rule 1. If you put down a joker, the next player will draw 3 cards, and you can choose what the suit will be, like a wildcard.
                 // if ((chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '1') || (chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '2')){
                 //     drawSomeCards =+ 3;
                 // }
@@ -251,7 +250,6 @@ public class HoneyBuns {
 
     //----------IMPLEMENT RULE3&4----------//
     // rules 3 and 4 are implemented here
-    // TODO: RULE3
     static boolean rule3()
     {
         System.out.println("\n\n**********TRIVIA TIME**********");
@@ -288,7 +286,6 @@ public class HoneyBuns {
             return true;
         } else return false;
     } // <-- To Test Program
-    // hola
     //rule 6 - person of your choice draws card on a played ace
     //----------IMPLEMENT RULE7&8----------//
     // rules 7 and 8 are implemented here
