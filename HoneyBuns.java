@@ -11,6 +11,8 @@ public class HoneyBuns {
         playgame();
     }
     
+    //note to myself: when the game reshuffles i have to make sure the top card isn't a joker once again.
+
     static void playgame(){
 
         /* Initial Array Lists  */
@@ -33,11 +35,11 @@ public class HoneyBuns {
         System.out.println("\nHi " + playerName + "! The game will now start. The rules will be shown below, read them carefully.\n");
 
         System.out.println("1. Each player receives 7 cards at the beginning of the game.\n");
-        System.out.println("2. Player 1 goes first. They can place a card that matches the suit or number of the top card on the discard pile. Jokers and Kings can be played regardless of the top card. If you cannot play a card, then draw one, and it will move to the next player.\n");
+        System.out.println("2. Player 1 goes first. They can place a card that matches the suit or number of the top card on the discard pile. Jokers and Kings can be played regardless of the top card. \nIf you cannot play a card, then draw one, and it will move to the next player.\n");
         System.out.println("3. If a Joker is placed, then the current player can choose the top card to be whatever they wish, and the next player will be forced to draw 3 cards.\n");
         System.out.println("4. If a Jack is placed, then the next player will be forced to draw 1 card.\n");
         System.out.println("5. If a King is placed, the next player can place any card regardless of the top card. So yes, this helps the next player, but it also helps you since Kings can be played at any time.\n");
-        System.out.println("6. If a Queen is placed, Then a trivia question is given, and if answered correctly you may place another card. This “another card” you place if you answer the question correctly does not trigger any special effects it might originally have. For example, you place down a queen, you answer the trivia correctly, and place down a Joker. This Joker will not trigger its effects.\n");
+        System.out.println("6. If a Queen is placed, Then a trivia question is given, and if answered correctly you may place another card. This 'another card' you place if you answer the question correctly does not trigger \nany special effects it might originally have. For example, if you place down a queen, answer the trivia correctly, and place down a Joker, then this Joker will not trigger its effects.\n");
         System.out.println("7. If an Ace is placed, then you can force any player to draw 4 cards.\n");
         System.out.println("8. Whoever gets rid of all the cards in their hand first will win.\n");
 
@@ -138,9 +140,9 @@ public class HoneyBuns {
 
                 int chosenCardNum = scnr.nextInt();
                 
-                while (chosenCardNum > userPlayer.size() || chosenCardNum <= 0) {
+                while (chosenCardNum > userPlayer.size() || chosenCardNum <= 0) { //checks if they pick a valid number for their chosen card each turn.
 
-                    if (chosenCardNum > userPlayer.size()) {
+                    if (chosenCardNum > userPlayer.size()) { 
                         System.out.println("I don't know what to tell ya, you picked card #" + chosenCardNum + " when you only have " + userPlayer.size() + " cards in your hand. You may want to refresh up on your counting skills. Pick again please.");
                         chosenCardNum = scnr.nextInt();
                     }
@@ -185,9 +187,8 @@ public class HoneyBuns {
                     }
 
                     //----------RULE1----------//
-                    //rule 1. If you put down a joker, the next player will draw 3 cards.
+                    //rule 1.  If a Joker is placed, then the current player can choose the top card to be whatever they wish, and the next player will be forced to draw 3 cards.
 
-                    //TO DO : make it so the first card in the discardpile at start of game cannot be a joker
                     if ((chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '1') || (chosenCard.charAt(0) == 'J' && chosenCard.charAt(1) == '2')){
                         drawSomeCards = 3;
                         System.out.println("You can choose the card to be whatever you wish except a joker - examples: H7, CK, S2, D9. Type it below.");
@@ -199,7 +200,8 @@ public class HoneyBuns {
                     }
                 
                     //----------RULE2----------//
-                    //rule 2. If you put down a Jack, the next player will draw 1 card.
+                    //If a Jack is placed, then the next player will be forced to draw 1 card.
+
                     if(discardPile.get(0).charAt(0) == chosenCard.charAt(0) || discardPile.get(0).charAt(1) == chosenCard.charAt(1)) {
 
                         if (chosenCard.charAt(1) == 'J') {
