@@ -107,11 +107,11 @@ public class HoneyBuns {
                 printArrayList(userPlayer);
                 System.out.println("Top Of Discard Pile: " + discardPile.get(0));
                 //----------PROMPT USER----------//
-                System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + "): ");
+                System.out.print("Pick a card (Enter # between 1 and " + userPlayer.size() + " or 0 to draw): ");
                 int chosenCardNum = scnr.nextInt();
 
                 //----------CHECK TO SEE IF DRAW CARD SELECTED----------//
-                if (chosenCardNum == 55)
+                if (chosenCardNum == 0)
                 {
                     currentPlayer.add(drawCard(drawPile,discardPile));
                     drawCard = true;
@@ -158,6 +158,10 @@ public class HoneyBuns {
                         {
                             System.out.println("Incorrect! Try again next time!");
                         }
+                    }
+                    //rule 6
+                    if (discard && (chosenCard.charAt(1) == 'A')) {
+                        rule6(userPlayer, computerPlayer2, computerPlayer3, computerPlayer4, drawPile, discardPile);
                     }
                 }
                 
@@ -277,9 +281,8 @@ public class HoneyBuns {
         System.out.println("\n\nWhat would you like the next suit to be? \ns for spade\n h for hearts \nc for clubs\nd for diamonds");
     }
 
-    //----------IMPLEMENT RULE5&6----------//
+    //----------IMPLEMENT RULE5&6----------// Emmanuel Tobias
     // rules 5 and 6 are implemented here
-    //Emmanuel Tobias
     // rule 5 - whoever runs out of cards first wins
     static boolean rule5(ArrayList<String> UserHand){
         if (UserHand.size() == 0) {
@@ -287,6 +290,49 @@ public class HoneyBuns {
         } else return false;
     } // <-- To Test Program
     //rule 6 - person of your choice draws card on a played ace
+    // asks for int input between 1 and 4
+    // 1 is human, 2-4 are computers
+    // adds card from top of deck to desired player's hand
+    static void rule6(ArrayList<String> userPlayer, ArrayList<String> computerPlayer2, ArrayList<String> computerPlayer3, ArrayList<String> computerPlayer4, ArrayList<String> drawPile, ArrayList<String> discardPile) {
+        Scanner scnr = new Scanner(System.in);
+        System.out.print("You played an ace! Enter a # 1-4 to choose who you want to draw: ");
+        switch (scnr.nextInt()) {
+            case 1:
+                System.out.println("Player 1 draws a card. ");
+                userPlayer.add(drawCard(drawPile, discardPile));
+                // System.out.println("Player 1 hand");
+                // for (int i = 0; i < userPlayer.size(); i++) {
+                //     System.out.print(userPlayer.get(i) + " ");
+                // }
+                break;
+            case 2:
+                System.out.println("Player 2 draws a card. ");
+                computerPlayer2.add(drawCard(drawPile, discardPile));
+                // System.out.println("Player 2 hand");
+                // for (int i = 0; i < computerPlayer2.size(); i++) {
+                //     System.out.print(computerPlayer2.get(i) + " ");
+                // }
+                break;
+            case 3:
+                System.out.println("Player 3 draws a card. ");
+                computerPlayer3.add(drawCard(drawPile, discardPile));
+                // System.out.println("Player 3 hand");
+                // for (int i = 0; i < computerPlayer3.size(); i++) {
+                //     System.out.print(computerPlayer3.get(i) + " ");
+                // }
+                break;
+            case 4:
+                System.out.println("Player 4 draws a card. ");
+                computerPlayer4.add(drawCard(drawPile, discardPile));
+                // System.out.println("Player 4 hand");
+                // for (int i = 0; i < computerPlayer4.size(); i++) {
+                //     System.out.print(computerPlayer4.get(i) + " ");
+                // }
+                break;
+            default:
+                break;
+        }
+    }
     //----------IMPLEMENT RULE7&8----------//
     // rules 7 and 8 are implemented here
     
