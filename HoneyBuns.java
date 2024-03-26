@@ -166,7 +166,7 @@
                         System.out.println("You only have one card left in your hand!!!! Play it!");
                     }
                     else {
-                        System.out.print("\nPick a card (Enter a # ranging from 1 to " + userPlayer.size() + "): ");
+                        System.out.print("\nPick a card (Enter a # ranging from 1 to " + userPlayer.size() + " or 0 to draw): ");
                     }
 
 
@@ -276,6 +276,11 @@
                                 userPlayer.remove(chosenCard);
                             }
                         }
+                        //Rule 6 - If an ace is played, choose someone to draw a card//
+                        if (discard && chosenCard.charAt(1)=='A') {
+                            rule6(userPlayer, computerPlayer2, computerPlayer3, computerPlayer4, drawPile, discardPile, currentPlayer);
+                            
+                        }
 
                     }
                 
@@ -350,17 +355,62 @@
         }
 
 
-        //----------IMPLEMENT RULE5&6----------//
-        // rules 5 and 6 are implemented here
-        //Emmanuel Tobias
-        // rule 5 - whoever runs out of cards first wins
-        static boolean rule5(ArrayList<String> UserHand){
-            if (UserHand.size() == 0) {
-                return true;
-            } else return false;
-        } // <-- To Test Program
-        // hola
-        //rule 6 - person of your choice draws card on a played ace
+    //----------IMPLEMENT RULE5&6----------// Emmanuel Tobias
+    // rules 5 and 6 are implemented here
+    // rule 5 - whoever runs out of cards first wins
+    static boolean rule5(ArrayList<String> UserHand){
+        if (UserHand.size() == 0) {
+            return true;
+        } else return false;
+    } // <-- To Test Program
+    //rule 6 - person of your choice draws card on a played ace
+    // asks for int input between 1 and 4
+    // 1 is human, 2,3,4 are computers
+    // adds card from top of deck to desired player's hand
+    static void rule6(ArrayList<String> userPlayer, ArrayList<String> computerPlayer2, ArrayList<String> computerPlayer3, ArrayList<String> computerPlayer4, ArrayList<String> drawPile, ArrayList<String> discardPile, ArrayList<String> currentPlayer) {
+        if (currentPlayer != userPlayer) {
+            userPlayer.add(drawCard(drawPile, discardPile));
+            return;
+        }
+        Scanner scnr = new Scanner(System.in);
+        System.out.print("You played an ace! Enter a # 1-4 to choose who you want to draw: ");
+        switch (scnr.nextInt()) {
+            case 1:
+                System.out.println("Player 1 draws a card. ");
+                userPlayer.add(drawCard(drawPile, discardPile));
+                // System.out.println("Player 1 hand");
+                // for (int i = 0; i < userPlayer.size(); i++) {
+                //     System.out.print(userPlayer.get(i) + " ");
+                // }
+                break;
+            case 2:
+                System.out.println("Player 2 draws a card. ");
+                computerPlayer2.add(drawCard(drawPile, discardPile));
+                // System.out.println("Player 2 hand");
+                // for (int i = 0; i < computerPlayer2.size(); i++) {
+                //     System.out.print(computerPlayer2.get(i) + " ");
+                // }
+                break;
+            case 3:
+                System.out.println("Player 3 draws a card. ");
+                computerPlayer3.add(drawCard(drawPile, discardPile));
+                // System.out.println("Player 3 hand");
+                // for (int i = 0; i < computerPlayer3.size(); i++) {
+                //     System.out.print(computerPlayer3.get(i) + " ");
+                // }
+                break;
+            case 4:
+                System.out.println("Player 4 draws a card. ");
+                computerPlayer4.add(drawCard(drawPile, discardPile));
+                // System.out.println("Player 4 hand");
+                // for (int i = 0; i < computerPlayer4.size(); i++) {
+                //     System.out.print(computerPlayer4.get(i) + " ");
+                // }
+                break;
+            default:
+                break;
+        }
+    }
         //----------IMPLEMENT RULE7&8----------//
         // rules 7 and 8 are implemented here
     
