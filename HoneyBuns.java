@@ -161,7 +161,7 @@ public class HoneyBuns {
                     }
                     //rule 6
                     if (discard && (chosenCard.charAt(1) == 'A')) {
-                        rule6(userPlayer, computerPlayer2, computerPlayer3, computerPlayer4, drawPile, discardPile);
+                        rule6(userPlayer, computerPlayer2, computerPlayer3, computerPlayer4, drawPile, discardPile, currentPlayer);
                     }
                 }
                 
@@ -291,9 +291,13 @@ public class HoneyBuns {
     } // <-- To Test Program
     //rule 6 - person of your choice draws card on a played ace
     // asks for int input between 1 and 4
-    // 1 is human, 2-4 are computers
+    // 1 is human, 2,3,4 are computers
     // adds card from top of deck to desired player's hand
-    static void rule6(ArrayList<String> userPlayer, ArrayList<String> computerPlayer2, ArrayList<String> computerPlayer3, ArrayList<String> computerPlayer4, ArrayList<String> drawPile, ArrayList<String> discardPile) {
+    static void rule6(ArrayList<String> userPlayer, ArrayList<String> computerPlayer2, ArrayList<String> computerPlayer3, ArrayList<String> computerPlayer4, ArrayList<String> drawPile, ArrayList<String> discardPile, ArrayList<String> currentPlayer) {
+        if (currentPlayer != userPlayer) {
+            userPlayer.add(drawCard(drawPile, discardPile));
+            return;
+        }
         Scanner scnr = new Scanner(System.in);
         System.out.print("You played an ace! Enter a # 1-4 to choose who you want to draw: ");
         switch (scnr.nextInt()) {
