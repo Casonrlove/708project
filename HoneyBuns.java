@@ -41,11 +41,11 @@
 
 
             System.out.println("1. Each player receives 7 cards at the beginning of the game.\n");
-            System.out.println("2. Player 1 goes first. They can place a card that matches the suit or number of the top card on the discard pile. Jokers and Kings can be played regardless of the top card. If you cannot play a card, then draw one, and it will move to the next player.\n");
+            System.out.println("2. Player 1 goes first. They can place a card that matches the suit or number of the top card on the discard pile. Jokers can be played regardless of the top card.\n   If you cannot play a card, then draw one, and it will move to the next player.\n");
             System.out.println("3. If a Joker is placed, then the current player can choose the top card to be whatever they wish, and the next player will be forced to draw 3 cards.\n");
             System.out.println("4. If a Jack is placed, then the next player will be forced to draw 1 card.\n");
-            System.out.println("5. If a King is placed, the next player can place any card regardless of the top card. So yes, this helps the next player, but it also helps you since Kings can be played at any time.\n");
-            System.out.println("6. If a Queen is placed, Then a trivia question is given, and if answered correctly you may place another card. This 'another card' you place if you answer the question correctly does not trigger any special effects it might originally have. For example, if you place down a queen, you answer the trivia correctly, and place down a Joker, then this Joker will not trigger its effects.\n");
+            System.out.println("5. If a King is placed, the next player's turn will be skipped.\n");
+            System.out.println("6. If a Queen is placed, Then a trivia question is given, and if answered correctly you may place another card. This 'another card' you place if you answer the question correctly does not trigger any special effects   it might originally have. For example, if you place down a queen, you answer the trivia correctly, and place down a Joker, then this Joker will not trigger its effects.\n");
             System.out.println("7. If an Ace is placed, then you can force any player to draw a card.\n");
             System.out.println("8. Whoever gets rid of all the cards in their hand first will win. Don't pick a card that's out of the range of your hand, although there are surprises in store if you do >:)\n");
 
@@ -308,7 +308,7 @@
             }
         
             if (player == 5) {
-                System.out.println("Congratulations, you won!!! Thanks for playing!");
+                System.out.println("Congratulations, you won " + playerName + "! Thanks for playing!");
             }
             else {
             System.out.println("The game has been won by computer player " + (player - 1) + ", thanks for playing! Better luck next time... o7");
