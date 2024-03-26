@@ -219,6 +219,7 @@
 
                             userPlayer.remove(chosenCard);
                             discardPile.set(0, rule1wildcard);
+                            System.out.println();
                         }
                 
                         //----------RULE2----------//
