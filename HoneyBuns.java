@@ -10,7 +10,26 @@
     public class HoneyBuns {
     
         public static void main(String[] args) {
-            playgame();
+            Scanner rep = new Scanner(System.in);
+            
+            Boolean replay = true;
+            while (replay == true) {
+                playgame();
+                System.out.println("\nWould you like to play again? Type in Yes or No, please.");
+                String replayText = rep.next();
+                replayText = replayText.toUpperCase();
+
+                while (!replayText.equals("YES") ) {
+                    if (replayText.equals("NO")) {
+                        System.exit(0);
+                    }
+
+                    System.out.println("Please enter a valid message. Type in Yes or No.");
+                    replayText = rep.next();
+                    replayText = replayText.toUpperCase();
+                }
+
+            } 
         }
     
         static void playgame(){
@@ -41,7 +60,7 @@
 
 
             System.out.println("1. Each player receives 7 cards at the beginning of the game.\n");
-            System.out.println("2. Player 1 goes first. They can place a card that matches the suit or number of the top card on the discard pile. Jokers can be played regardless of the top card.\n   If you cannot play a card, then draw one, and it will move to the next player.\n");
+            System.out.println("2. Player 1 goes first. They can place a card that matches the suit or number of the top card on the discard pile. Jokers can be played regardless of the top card.\n   If you cannot play a card, then draw one by typing in '0', and it will move to the next player.\n");
             System.out.println("3. If a Joker is placed, then the current player can choose the top card to be whatever they wish, and the next player will be forced to draw 3 cards.\n");
             System.out.println("4. If a Jack is placed, then the next player will be forced to draw 1 card.\n");
             System.out.println("5. If a King is placed, the next player's turn will be skipped.\n");
@@ -64,23 +83,9 @@
 
 
             while (drawPile.get(0) == "J1" || drawPile.get(0) == "J2") {
-                for(int cardIndex = 0; cardIndex < drawPile.size(); cardIndex++){
-
-
-                    // Generate a random position between 0 and deck length
-                    int randomInt = (int)(Math.random() * drawPile.size() );
-    
-                    // Swap Positions
-                    String tempCard = drawPile.get(cardIndex);
-                    drawPile.set(cardIndex, drawPile.get(randomInt));
-                    drawPile.set(randomInt, tempCard);
-                }
+                createInitialDiscardPile(drawPile, discardPile);
             }
-            //printArrayList(drawPile);
-            //printArrayList(discardPile);
             // end of creating initial discard pile
-
-
 
 
             currentPlayer = userPlayer; // User Player Goes First
@@ -144,9 +149,15 @@
 
 
                     for (int i = 0; i < userPlayer.size(); i++) {
-                        System.out.print((i+1) + "  ");
+                        if (i <= 8 ) {
+                            System.out.print((i+1) + "  ");
+                        }
+                        else {
+                            System.out.print((i+1) + " ");
+                        }
                     }
                     System.out.println();
+
                     printArrayList(userPlayer);
 
 
@@ -184,7 +195,7 @@
                     {
                         currentPlayer.add(drawCard(drawPile,discardPile));
                         drawCard = true;
-                        System.out.print("\nYou have drawn a card!");
+                        System.out.print("\nYou have drawn a card!\n");
                     }
                     //----------USER DOESN'T SELECT TO DRAW A CARD----------//
                     else
@@ -242,7 +253,6 @@
                         {
                             if (rule3())
                             {
-                                Scanner scnr4 = new Scanner (System.in);
                                 //----------PRINT USER'S HAND, TOP OF DISCARD PILE----------//
                                 System.out.println("You answered correctly! You get to discard an extra card!");
                                 System.out.println("Your Cards: ");
@@ -307,13 +317,12 @@
 
             }
         
-            if (player == 5) {
+            if (player == 2) {
                 System.out.println("Congratulations, you won " + playerName + "! Thanks for playing!");
             }
             else {
             System.out.println("The game has been won by computer player " + (player - 1) + ", thanks for playing! Better luck next time... o7");
             }
-    
         } // End of PlayGame()
 
 
