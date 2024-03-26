@@ -262,7 +262,6 @@
 
                             if (chosenCard.charAt(1) == 'K') {
                                 player++;
-                                System.out.println("You have played a King. " + (player) + "'s turn has been skipped.");
                                 discardCard(chosenCard, discardPile);
                                 userPlayer.remove(chosenCard);
                             }
